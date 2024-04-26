@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite('resources/css/app.css')
     <title>Social Feed</title>
 </head>
 <body class="bg-gray-100 p-8">
@@ -16,13 +16,14 @@
             </form>
         </div>
         <div>
-            @foreach ($feeds as $feed)
+            @foreach ($feeds->reverse() as $feed)
                 <div class="bg-white p-4 rounded-lg shadow mb-8">
                     <p class="text-lg">{{ $feed->feed }}</p>
-                    <small class="text-gray-500 block mt-2">Posted by {{ $feed->user->name }} at {{ $feed->created_at }}</small>
+                    <small class="text-gray-500 block mt-2">Posted by {{ $feed->user->name ?? 'Unknown User' }} at {{ $feed->created_at }}</small>
                 </div>
             @endforeach
         </div>
     </div>
+    <script type="module" src="{{ vite_asset('resources/js/app.js') }}"></script>
 </body>
 </html>
